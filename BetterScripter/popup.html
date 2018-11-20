@@ -1,0 +1,31 @@
+<!doctype html>
+<html> 
+<head> 
+<script src="includes/jquery.js"></script>
+<style>
+	body { font-family: Arial, sans-serif; 
+		font-size:small; white-space:nowrap;
+		padding:.5em 1em .5em 1em;
+		color:#444; 
+	}
+	#activeScriptsLabel { margin-right:30px; font-weight:bold; }
+	#optionsLink { float:right; cursor:pointer; opacity:.8; }
+	#optionsLink:hover { opacity:1; }
+	#findScriptsLink { cursor:pointer; }
+	#findScriptsLink:hover { text-decoration:underline; }
+	ul { margin-left:0; padding-left:0; list-style:none; }
+	li { padding:.15em .5em .35em .5em; }
+	li:hover { color:#000; background-color:#d4eaf7; }
+	li input { position:relative; top:2px; }
+	li img.toolIcon { float:right; position:relative; top:4px; height:14px; opacity:.4; cursor:pointer; margin-left:.3em; }
+	li img.toolIcon:hover { opacity:1; }
+</style>
+</head>
+<body>
+	<img id="optionsLink" class="cog" title="Options"/>
+	<p id="activeScriptsLabel"><span id="numActiveScripts"></span> script<span id="numActiveScriptsPlural"></span> for this page</p>
+	<ul id="activeScripts"></ul>
+	<p><span id="findScriptsLink">Find scripts for this page</span></p>
+	<script src="includes/popup.js"></script> 
+</body>
+</html> 
