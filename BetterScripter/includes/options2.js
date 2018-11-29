@@ -29,6 +29,7 @@
 			$('#optionShowSites').attr('checked', getOption('showSites', true));
 			$('#optionShowFeatures').attr('checked', getOption('showFeatures', true));
 			$('#optionInstallAnywhere').attr('checked', getOption('installAnywhere', true));
+			$('#optionDisableCSP').attr('checked', getOption('disableCSP', true));
 			$('#optionMaxListHeight option').each(function(i) {
 				if(this.value == getOption('maxListHeight', 5111))
 					$('#optionMaxListHeight').attr('selectedIndex', i);
@@ -169,6 +170,9 @@ $('#newScriptButton').on("click", newScript);
 
 $('#optionInstallAnywhere').on("click", function(e) {
 	setOption('installAnywhere', e.target.checked);
+});
+$('#optionDisableCSP').on("click", function(e) {
+	setOption('disableCSP', e.target.checked);
 });
 $('#optionShowVersions').on("click", function(e) {
 	setOption('showVersions', e.target.checked);

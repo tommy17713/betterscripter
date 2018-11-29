@@ -1,3 +1,15 @@
+			var disableCSP = getOption('disableCSP', true);
+			if(disableCSP)
+			{
+				chrome.webRequest.onHeadersReceived.addListener(function(detail){
+				    return {
+				        responseHeaders: detail.responseHeaders.filter(function(hd){
+				            return !/content-security-policy/i.test(hd.name);
+				        })
+				    };
+				}, {urls: ["http://*/*","https://*/*"]}, ["blocking", "responseHeaders"]);
+			}			
+			
 			// var $ = getJqueryInstance();
 			// load installed scripts
 			var installedScripts = localStorage['installedScripts'];
@@ -107,7 +119,7 @@
 						// inject installing notice
 						installingNoticeTabId = sender.tab.id;
 						var xhtp = new XMLHttpRequest();
-				        xhtp.open("GET", chrome.extension.getURL('/includes/installing_notice.js'), true);
+				        xhtp.open("GET", chrome.extension.getURL('/includes/installing_notice.js'), false);
 				        xhtp.onload = function(){
 					        var installNoticeCode = xhtp.responseText;
 							chrome.tabs.executeScript(sender.tab.id, {
@@ -122,7 +134,7 @@
 						script.installFromUrl(request.src, {
 							website:typeof(request.website) == 'string' ? request.website : null
 						}, sendResponse, sender.tab.id);
-						return true;
+						//return true;
 						break;
 					case 'loadResource':
 						var resource = request.resource;
@@ -192,3 +204,5 @@
 				return getRandSmallHash() + getRandSmallHash();
 			}
 			var lastTabUrl = '';
+			
+			

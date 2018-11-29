@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Chrome User Script Handler</title>
+		<title>BetterScripter</title>
 		<link id="favicon" rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAArZJREFUeNqEU19IU2EUP/e7273u393uvbtzosuVWbaWmZYVUj5EED3lS4QkFGkRBL35UPSUD0kPQi+BD5VPPWW9KggRFEmJuLZppk3dxKn767a77c7v3u40xdikA4fDB+f78Tu/8zuEoihQjOHhYSDUyvNWsNlssLoahngyQTfUH3HxFk5OZ0VvJBLB8DfOnG3dqgj2CYIgOKQQfVqNZkx9jm4WCtfK9Wn2+e8ERXl5wOG4wll4CIWWQGXQRSLNu/8DEIQzsr7+hmXM7Q5HLayvrcJ84HfO4XSOVNA07IxcAqBSLmrg2MznBzkL215VVQ3ReBQ8s9PAs9wLgeMHNTS13bwHY1eDTCbT7Z+ZHvL6flzmrQJksiL4J7+DKZoAm549B4isIwkESE2SIEsZTE1NPcVYtmOWBa/fC3oJQ2pyDjJzS2CMhi7qOq4PKTR7T53Bo+yhsAtQWVlJGnR6sKlrjObCsCiG4ZO2BXIOPTw5/Bpo1KqyEDoRYA/IZTRwu90DGOMbjN7YuFwowIeNccDaFNxsW4CDbhmypG5Cg8iRfD7XW8gXguqXt/9oQNH0M6qC7kIkmqg21IBVqoVm+zfoOOkDTHYGkM71IJ8TL/2ane33+329JQzk4n4U8Eh4s4ehDK8eXbjflMwGISiJC1W25jsEQbbNeD2P4/HYPG+1vi/1wdZ+lWKdTOXFLiKDho7Wnq7T0LpbkpSt/+n3PY/FYkHXcVc3wzBfSwAUvG1zrGDQIlgZH/8STmwkk80tLTWBwFxfNBJZaWw8cdtkZj4qcpktyDsOU6ucww95Xri6tLCYjsUS502Mce2Y29XDWixjkiQVbVdqJLPJtJOI0tKHBLsdUmLGqM4ccTW47vI8P4qLLIl9boGiqF0yer1hILS8bBQEAZ1qaupnOfZzWkyXvbo/AgwAuGEcLbN6DX0AAAAASUVORK5CYII%3D" type="image/x-icon"> 
 		<script src="includes/jquery.js"></script>
 		<script src="includes/database.js"></script>
@@ -124,15 +124,14 @@
 	<body>
 		<div style="margin:2em auto; width:1000px; font-family:Arial, sans-serif; font-size:small;">
 			
-			<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=67TZLSEGYQFFW" target="_blank" title="Like this extension? Help support its continued development by making a donation.">
-				<img src="" id="contributeButton" style="float:right; margin-top:1em; max-width:300px" />
-			</a>
+			
 			
 			<img class="bcScriptHandlerLogo" style="float:left; margin:0 1em 2em 0;"/>
 			
-			<h1>Chrome User Script Handler<br/>
+			<h1>BetterScripter<br/>
 				<span style="font-size:12px; font-weight:normal;">by Jerome Dane (2010)</span>
 				<span style="font-size:12px; font-weight:normal;">updated by Markus Stefanko (2018)</span>
+				<span style="font-size:12px; font-weight:normal;">continued by Thomas Jacobs (2018)</span>
 			</h1>
 			<div id="optionsTabs">
 				<div id="tabList" class="active">Installed Scripts</div>
@@ -179,8 +178,9 @@
 							<input type="checkbox" id="optionInstallAnywhere" />
 							- turns links ending in ".user.js" on any page into install script links
 						</p>
-						<p><strong>Browser Button</strong>
-							- the browser button for this extension is available <a href="https://chrome.google.com/extensions/detail/nlfaljfpoopmcjbokaadfgaiidggddii">here</a>.
+						<p><strong>Disable CSP</strong>
+							<input type="checkbox" id="optionDisableCSP" />
+							- disables Content-Security-Policy headers, which prevent some scripts from running on certain websites
 						</p>
 					</div>
 					<div style="width:50%; float:left;">
@@ -220,7 +220,7 @@
 						<li>Does not process GM_registerMenuCommand yet</li>
 					</ul>
 					<p style="text-align:right;">To submit a bug not in the list, please 
-						<a href="https://github.com/stefanXO/Script-Handler" target="_blank">post a report</a> in the forums.
+						<a href="https://github.com/tommy17713/betterscripter" target="_blank">post a report</a> in the forums.
 					</p>
 				</div>
 				<div id="tabTodoContent" class="tabContent">
@@ -235,22 +235,22 @@
 						<li>Add some kind of script installation progress indicator</li>
 						<li>Add option to allow individual user scripts in incognito mode</li>
 						<li>Add option to hide extension button</li>
-						<li>Add support for @website to specift script website</li>
+						<li>Add support for @website to specify script website</li>
 						<li>Implement optional update checker for user scripts</li>
-						<li>Add support for @update to specift script update URL</li>
+						<li>Add support for @update to specify script update URL</li>
 						<li>Add number of scripts with an update available to extension button as badge</li>
 					</ul>
 					<p style="text-align:right;">To submit a suggestion for a feature or not listed here, please
-						<a href="https://github.com/stefanXO/Script-Handler" target="_blank">post a request</a> in the forums.
+						<a href="https://github.com/tommy17713/betterscripter" target="_blank">post a request</a> in the forums.
 					</p>
 				</div>
 				
 				<div id="tabAboutContent" class="tabContent">
 					<div style="width:300px; float:right; text-align:right;">
 						v<span class="versionWrapper"></span> &nbsp; 
-						[ <a href="https://github.com/stefanXO/Script-Handler" target="_blank">version history</a> ]
+						[ <a href="https://github.com/tommy17713/betterscripter" target="_blank">version history</a> ]
 					</div>
-					<h2 style="margin-top:0;"><a href="https://github.com/stefanXO/Script-Handler" target="_blank">Chrome User Script Handler</a>
+					<h2 style="margin-top:0;"><a href="https://github.com/tommy17713/betterscripter" target="_blank">BetterScripter</a>
 					</h2>
 					<div class="indent">
 						<p>This extension lets you customize web sites by running bits of JavaScript on pages. It's kind of an unofficial Greasemonkey for Chrome, and supports many of the GM_* functions used in most scripts. It is still in the early stages of development, basically in alpha (notice the 0.0.* version.)</p> 
@@ -258,22 +258,21 @@
 						<p>I started this project because I was not able to find a <a href="https://addons.mozilla.org/en-US/firefox/addon/748/">Greasemonkey</a> substitute for Chrome at the time. I have since been referred to Tampermonkey. It looks like a good extension, and from the source code, it seems very well written, but it does not do what I want as far as the interface goes.</p>
 						<p>I've gotten comments suggesting I stop this project work with others involved in similar projects. This makes sense on paper, but my goal is not to provide a perfect product, but rather to have fun making it, learn along the way, and end up with something I find useful.</p>
 						<p>I am making this extension available for public use in case others enjoy it. I make no claims that this is the best script handler extension out there, nor the most elegantly written. This is just my take on the matter.</p>
-						<p>If you like this extension and find yourself using it a lot, consider <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=67TZLSEGYQFFW">making a donation</a> of any amount to show your support.</p>
 					</div>
 					<h2 style="margin-top:1em;">Get Involved</h2>
 					<div class="indent">
-						<p>This project is open source. Feel free to tackle new features or bug fixes. Just let us know if you come up with something cool so that we can update the official release with credit given for your work. The source is <a href="http://github.com/stefanXO/Script-Handler">available through github</a>.</p>
+						<p>This project is open source. Feel free to tackle new features or bug fixes. Just let us know if you come up with something cool so that we can update the official release with credit given for your work. The source is <a href="https://github.com/tommy17713/betterscripter">available through github</a>.</p>
 						<p><strong>Useful Links</strong></p>
 						<ul>
-							<li><a href="http://github.com/stefanXO/Script-Handler">Project Home Page</a></li>
-							<li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=67TZLSEGYQFFW">Make a Donation</a></li>
+							<li><a href="https://github.com/tommy17713/betterscripter">Project Home Page</a></li>
 						</ul>
 					</div>
 					<h2 style="margin-top:1em;">License</h2>
 					<div class="indent">
 						<p>Copyright (c) 2009, 2010 Jerome Dane</p>
 						<p>Copyright (c) 2018 Markus Stefanko</p>
-						<p>Chrome User Script Handler is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+						<p>Copyright (c) 2018 Thomas Jacobs</p>
+						<p>BetterScripter is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
 						<p>This program is distributed in the hope that it will be useful,  but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
 						<p>You should have received a copy of the GNU General Public License along with this program.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
 					</div>						
