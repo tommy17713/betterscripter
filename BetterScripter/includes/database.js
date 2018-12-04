@@ -1,4 +1,24 @@
-
+chrome.storage.local.get(function(data){
+	for(var k in data)
+	{
+		if(k.indexOf('db') == 0)
+		{
+			localStorage[k] = data[k];
+		}
+	}
+});
+function syncStorages()
+{
+	var data = {};
+	for(var k in localStorage)
+	{
+		if(k.indexOf('db') == 0)
+		{
+			data[k] = localStorage[k];
+		}
+	}
+	chrome.storage.local.set(data);
+}
 var Database;
 var com = typeof(com) != 'undefined' ? com : {};
 com.blankcanvasweb = typeof(com.blankcanvasweb) != 'undefined' ? com.blankcanvasweb : {};
@@ -51,6 +71,7 @@ com.blankcanvasweb.Database = function() {
 			var storedPrimaryKey = localStorage.getItem('dbPrimaryKeysAutoIncrement_' + _name);
 			var nextKey = storedPrimaryKey ? parseInt(storedPrimaryKey) + 1 : 1;
 			localStorage.setItem('dbPrimaryKeysAutoIncrement_' + _name, nextKey);
+			syncStorages();
 			return nextKey;
 		}
 		function _getRecordIndexStorageKey(recordId) {
@@ -60,6 +81,7 @@ com.blankcanvasweb.Database = function() {
 			return 'dbTable_' + _name + '_' + fieldName + '_' + id;
 		}
 		// public methods
+		
 		this.empty = function() {
 			var records = this.getRecords();
 			for(var i = 0; i < records.length; i++)
@@ -120,6 +142,7 @@ com.blankcanvasweb.Database = function() {
 			}
 			// remove record from database table index
 			localStorage.removeItem(_getRecordIndexStorageKey(record.id));
+			syncStorages();
 		}
 		this.saveRecord = function(record, encode) {
 			if(!record.id) { // create a new record if the record has no existing id
@@ -135,6 +158,7 @@ com.blankcanvasweb.Database = function() {
 				else
 					localStorage.setItem(storageKey, record.updatedFields[fieldName]);
 			}
+			syncStorages();
 		}
 		// getters
 		this.name; this.__defineGetter__("name", function() { return _name; });
@@ -193,6 +217,7 @@ com.blankcanvasweb.Database = function() {
 		this.emptyField = function(fieldName){
 			_fieldCheck(fieldName);
 			localStorage.removeItem(_getStoreageKey(fieldName));
+			syncStorages();
 		}
 		this.save = function(encode) {
 			this.table.saveRecord(this, encode);
